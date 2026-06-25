@@ -1,0 +1,46 @@
+
+
+user:
+user_name
+(p.k)
+user_id
+
+
+order:
+(p.k)
+order_id
+(f.k)
+user_id
+order_date
+
+
+customers who din't made any order
+
+select
+	user.user_name
+from user 
+left join order
+on user.user_id = order.user_id
+where order.user_id is NULL;
+
+
+
+emp:
+emp_id
+emp_name
+dept
+salary
+
+
+with cte as (
+select
+	*,
+	dense_rank(salary) over(partition by dept) as salary_rnk
+from emp)
+select
+	*
+from cte
+where salary_rnk = 2;
+
+ntiles() -> percentiles !
+
